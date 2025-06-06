@@ -13,6 +13,8 @@ int main(){
     int NumeroPontoTuristico2;
     float AreaKM2, PIB2, DensidadePopulacional2, PIBPerCapita2, SuperPoder2;
 
+    int opcao;
+
     // Pegandos os dados de entrada e armazenando para todos os 1.
     printf("\n Digite a primeira letra, em maiusculo, do seu estado: \n");
     scanf("%2s", Estado1);
@@ -67,49 +69,95 @@ int main(){
     PIBPerCapita2 = PIB2 / Populacao2;
     SuperPoder2 = (float)Populacao2 + AreaKM2 + PIB2 + (float)NumeroPontoTuristico2 + PIBPerCapita2 + (1 / DensidadePopulacional2);
 
-    // Imprimindo na tela a Carta 01.
-    printf("\n=====================\n");
-    printf("\nCarta 01:\n");
-    printf("\n=====================\n");
-    printf("Estado: %s\n", Estado1);
-    printf("Codigo de Carta: %s\n", CodigoCarta1);
-    printf("Nome da Cidade: %s\n", NomeCidade1);
-    printf("População: %lu\n", Populacao1);
-    printf("Área em Km²: %.2f\n", AreaKM1);
-    printf("PIB: %.2f\n", PIB1);
-    printf("Numero de Pontos Turísticos: %d\n", NumeroPontoTuristico1);
-    printf("Densidade Populacional: %.2f hab/km²\n", DensidadePopulacional1);
-    printf("PIB per Capita: R$ %.2f\n", PIBPerCapita1);
-    printf("Super Poder: %.2f\n", SuperPoder1);
-    printf("\n=====================\n");
+    // Menu de comparação
+    printf("\nEscolha o atributo para comparação:\n");
+    printf("1 - População\n");
+    printf("2 - Área\n");
+    printf("3 - PIB\n");
+    printf("4 - Pontos Turísticos\n");
+    printf("5 - Densidade Populacional\n");
+    printf("6 - PIB per Capita\n");
+    printf("Digite sua opção: ");
+    scanf("%d", &opcao);
 
-    // Imprimindo na tela a Carta 02.
-    printf("\n=====================\n");
-    printf("\nCarta 02:\n");
-    printf("\n=====================\n");
-    printf("Estado: %s\n", Estado2);
-    printf("Codigo de Carta: %s\n", CodigoCarta2);
-    printf("Nome da Cidade: %s\n", NomeCidade2);
-    printf("População: %lu\n", Populacao2);
-    printf("Área em Km²: %.2f\n", AreaKM2);
-    printf("PIB: %.2f\n", PIB2);
-    printf("Numero de Pontos Turísticos: %d\n", NumeroPontoTuristico2);
-    printf("Densidade Populacional: %.2f hab/km²\n", DensidadePopulacional2);
-    printf("PIB per Capita: R$ %.2f\n", PIBPerCapita2);
-    printf("Super Poder: %.2f\n", SuperPoder2);
-    printf("\n=====================\n");
+    printf("\nComparação de cartas (%s vs %s):\n", NomeCidade1, NomeCidade2);
 
-    // Comparação por atributo fixo: PIB per capita
-    printf("\nComparação de Cartas (Atributo: PIB per capita):\n\n");
-    printf("Carta 1 - %s (%s): R$ %.2f\n", NomeCidade1, Estado1, PIBPerCapita1);
-    printf("Carta 2 - %s (%s): R$ %.2f\n", NomeCidade2, Estado2, PIBPerCapita2);
+    switch(opcao) {
+        case 1:
+            printf("Atributo: População\n");
+            printf("%s: %lu\n", NomeCidade1, Populacao1);
+            printf("%s: %lu\n", NomeCidade2, Populacao2);
+            if (Populacao1 > Populacao2)
+                printf("Resultado: %s venceu!\n", NomeCidade1);
+            else if (Populacao2 > Populacao1)
+                printf("Resultado: %s venceu!\n", NomeCidade2);
+            else
+                printf("Resultado: Empate!\n");
+            break;
 
-    if (PIBPerCapita1 > PIBPerCapita2) {
-        printf("Resultado: Carta 1 (%s) venceu!\n", NomeCidade1);
-    } else if (PIBPerCapita2 > PIBPerCapita1) {
-        printf("Resultado: Carta 2 (%s) venceu!\n", NomeCidade2);
-    } else {
-        printf("Resultado: Empate!\n");
+        case 2:
+            printf("Atributo: Área\n");
+            printf("%s: %.2f km²\n", NomeCidade1, AreaKM1);
+            printf("%s: %.2f km²\n", NomeCidade2, AreaKM2);
+            if (AreaKM1 > AreaKM2)
+                printf("Resultado: %s venceu!\n", NomeCidade1);
+            else if (AreaKM2 > AreaKM1)
+                printf("Resultado: %s venceu!\n", NomeCidade2);
+            else
+                printf("Resultado: Empate!\n");
+            break;
+
+        case 3:
+            printf("Atributo: PIB\n");
+            printf("%s: R$ %.2f\n", NomeCidade1, PIB1);
+            printf("%s: R$ %.2f\n", NomeCidade2, PIB2);
+            if (PIB1 > PIB2)
+                printf("Resultado: %s venceu!\n", NomeCidade1);
+            else if (PIB2 > PIB1)
+                printf("Resultado: %s venceu!\n", NomeCidade2);
+            else
+                printf("Resultado: Empate!\n");
+            break;
+
+        case 4:
+            printf("Atributo: Pontos Turísticos\n");
+            printf("%s: %d\n", NomeCidade1, NumeroPontoTuristico1);
+            printf("%s: %d\n", NomeCidade2, NumeroPontoTuristico2);
+            if (NumeroPontoTuristico1 > NumeroPontoTuristico2)
+                printf("Resultado: %s venceu!\n", NomeCidade1);
+            else if (NumeroPontoTuristico2 > NumeroPontoTuristico1)
+                printf("Resultado: %s venceu!\n", NomeCidade2);
+            else
+                printf("Resultado: Empate!\n");
+            break;
+
+        case 5:
+            printf("Atributo: Densidade Populacional (menor vence)\n");
+            printf("%s: %.2f hab/km²\n", NomeCidade1, DensidadePopulacional1);
+            printf("%s: %.2f hab/km²\n", NomeCidade2, DensidadePopulacional2);
+            if (DensidadePopulacional1 < DensidadePopulacional2)
+                printf("Resultado: %s venceu!\n", NomeCidade1);
+            else if (DensidadePopulacional2 < DensidadePopulacional1)
+                printf("Resultado: %s venceu!\n", NomeCidade2);
+            else
+                printf("Resultado: Empate!\n");
+            break;
+
+        case 6:
+            printf("Atributo: PIB per Capita\n");
+            printf("%s: R$ %.2f\n", NomeCidade1, PIBPerCapita1);
+            printf("%s: R$ %.2f\n", NomeCidade2, PIBPerCapita2);
+            if (PIBPerCapita1 > PIBPerCapita2)
+                printf("Resultado: %s venceu!\n", NomeCidade1);
+            else if (PIBPerCapita2 > PIBPerCapita1)
+                printf("Resultado: %s venceu!\n", NomeCidade2);
+            else
+                printf("Resultado: Empate!\n");
+            break;
+
+        default:
+            printf("Opção inválida.\n");
+            break;
     }
 
     return 0;
